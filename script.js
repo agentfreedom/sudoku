@@ -35,6 +35,12 @@ const game = {
 			activeCell,
 			board
 		} = this;
+		const canChange = this.startBoard[activeCell] === '.';
+
+		if (!canChange) {
+			return;
+		}
+
 		const startBoard = board.slice(0, activeCell);
 		const endBoard = board.slice(activeCell + 1);
 
@@ -44,6 +50,7 @@ const game = {
 
 	start(complexity) {
 		this.board = sudoku.generate(complexity);
+		this.startBoard = this.board;
 
 		this.render();
 	},
