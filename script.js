@@ -37,7 +37,7 @@ const game = {
 		} = this;
 		const canChange = this.startBoard[activeCell] === '.';
 
-		if (!canChange && num === 0) {
+		if (!canChange || num === 0 || isNaN(num)) {
 			return;
 		}
 
