@@ -30,14 +30,14 @@ const game = {
 	},
 
 	fillCell(e) {
-		const num = e.key;
+		const num = parseInt(e.key);
 		const {
 			activeCell,
 			board
 		} = this;
 		const canChange = this.startBoard[activeCell] === '.';
 
-		if (!canChange) {
+		if (!canChange && num === 0) {
 			return;
 		}
 
