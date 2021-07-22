@@ -23,6 +23,24 @@ const game = {
 
 	start(complexity) {
 		this.board = sudoku.generate(complexity);
+
+		this.render();
+	},
+
+	render() {
+		const {
+			board
+		} = this;
+
+		this.cells.forEach(function (cell, idx) {
+			const text = board[idx];
+
+			if (text === '.') {
+				cell.innerText = '';
+			} else {
+				cell.innerText = text;
+			}
+		});
 	}
 
 };
