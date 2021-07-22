@@ -26,6 +26,10 @@ const game = {
 
 	activateCell(i) {
 		this.activeCell = i;
+		this.activeRow = Math.floor(i / 9);
+		this.activeColumn = i % 9;
+		this.activeSquare = this.activeColumn % 3 + 3 * (this.activeRow % 3);
+
 		this.render();
 	},
 
@@ -33,9 +37,11 @@ const game = {
 		const num = parseInt(e.key);
 		const {
 			activeCell,
-			board
+			board,
+			activeSquare
 		} = this;
 		const canChange = this.startBoard[activeCell] === '.';
+		const candidates = sudoku.get_candidates(this.board);
 
 		if (!canChange || num === 0 || isNaN(num)) {
 			return;
