@@ -13,7 +13,7 @@ const game = {
 
 			cell.className = 'sudoku__cell';
 
-			cell.addEventListener('click', this.activateCell.bind(this, cell, i));
+			cell.addEventListener('click', this.activateCell.bind(this, i));
 
 			cells.push(cell);
 		}
@@ -21,11 +21,24 @@ const game = {
 		this.cells = cells;
 		this.boardElem.append(...cells /* = cell[1], cell[2], cell[3],... .cell[n]*/ );
 
+		window.addEventListener('keypress', this.fillCell.bind(this));
 	},
 
-	activateCell(cell, i) {
-		console.log('activateCell', this, cell, i);
-		this.activateCell = i;
+	activateCell(i) {
+		this.activeCell = i;
+		this.render();
+	},
+
+	fillCell(e) {
+		const num = e.key;
+		const {
+			activeCell,
+			board
+		} = this;
+		const startBoard = board.slice(0, activeCell);
+		const endBoard = board.slice(activeCell + 1);
+
+		this.board = startBoard + num + endBoard;
 		this.render();
 	},
 
@@ -38,7 +51,7 @@ const game = {
 	render() {
 		const {
 			board,
-			activateCell
+			activeCell
 		} = this;
 
 		this.cells.forEach(function (cell, idx) {
@@ -50,7 +63,7 @@ const game = {
 				cell.innerText = text;
 			}
 
-			if (activateCell === idx) {
+			if (activeCell === idx) {
 				cell.classList.add('sudoku__cell--active');
 			} else {
 				cell.classList.remove('sudoku__cell--active');
