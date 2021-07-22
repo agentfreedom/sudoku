@@ -32,3 +32,7 @@
 .sudoku__cell:nth-child(n + 46):nth-child(-n + 54) {
   border-bottom: 3px solid #000;
 }
+
+.sudoku__cell--active {
+  background: #ddc9c9;
+}
